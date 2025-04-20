@@ -1,21 +1,38 @@
 // apps/client/src/components/Header.jsx
-import { useState } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { FiShoppingCart, FiUser, FiMenu, FiX } from 'react-icons/fi';
 import { useAuth } from '../hooks/useAuth';
 import { useCart } from '../hooks/useCart';
+import { logout } from '../utils/auth';
 
 const Header = () => {
-  const { user, logout } = useAuth();
+  const { user } = useAuth();
   const { cartItems } = useCart();
   const navigate = useNavigate();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+  const dropdownRef = useRef(null);
+
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
+        setIsDropdownOpen(false);
+      }
+    };
+
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => document.removeEventListener('mousedown', handleClickOutside);
+  }, []);
 
   const toggleMobileMenu = () => {
     setMobileMenuOpen(!mobileMenuOpen);
   };
 
-  const handleLogout = () => {
+  const toggleDropdown = () => setIsDropdownOpen(!isDropdownOpen);
+
+  const handleLogout = (e) => {
+    e.preventDefault();
     logout();
     navigate('/');
   };
@@ -50,28 +67,33 @@ const Header = () => {
             </Link>
 
             {user ? (
-              <div className="relative group">
-                <button className="flex items-center space-x-1 text-gray-700 hover:text-primary-600">
+              <div className="relative" ref={dropdownRef}>
+                <button
+                  onClick={toggleDropdown}
+                  className="flex items-center space-x-1 text-gray-700 hover:text-primary-600"
+                >
                   <FiUser className="w-6 h-6" />
                 </button>
-                <div className="absolute right-0 mt-2 w-48 bg-white rounded-md shadow-lg overflow-hidden z-20 hidden group-hover:block">
-                  <div className="px-4 py-2 text-sm text-gray-700 border-b">
-                    <p className="font-medium">{user.name}</p>
-                    <p className="text-gray-500 truncate">{user.email}</p>
+                {isDropdownOpen && (
+                  <div className="absolute right-0 mt-2 w-48 bg-white rounded-md shadow-lg overflow-hidden z-20">
+                    <div className="px-4 py-2 text-sm text-gray-700 border-b">
+                      <p className="font-medium">{user.name}</p>
+                      <p className="text-gray-500 truncate">{user.email}</p>
+                    </div>
+                    <Link to="/profile" className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">
+                      Profile
+                    </Link>
+                    <Link to="/orders" className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">
+                      Orders
+                    </Link>
+                    <button 
+                      onClick={handleLogout}
+                      className="block w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                    >
+                      Logout
+                    </button>
                   </div>
-                  <Link to="/profile" className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">
-                    Profile
-                  </Link>
-                  <Link to="/orders" className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">
-                    Orders
-                  </Link>
-                  <button 
-                    onClick={handleLogout}
-                    className="block w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
-                  >
-                    Logout
-                  </button>
-                </div>
+                )}
               </div>
             ) : (
               <Link to="/login" className="text-gray-700 hover:text-primary-600">
@@ -134,8 +156,8 @@ const Header = () => {
                   Orders
                 </Link>
                 <button 
-                  onClick={() => {
-                    handleLogout();
+                  onClick={(e) => {
+                    handleLogout(e);
                     setMobileMenuOpen(false);
                   }}
                   className="block w-full text-left py-2 text-gray-700 hover:text-primary-600"
