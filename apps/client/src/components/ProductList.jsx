@@ -4,7 +4,7 @@ import ProductCard from './ProductCard';
 import { useProducts } from '../hooks/useProducts';
 import { FiFilter, FiX } from 'react-icons/fi';
 
-const ProductList = ({ initialFilters = {}, onFilterChange }) => {
+const ProductList = ({ initialFilters = {} }) => {
   const [filters, setFilters] = useState(initialFilters);
   const [showFilters, setShowFilters] = useState(false);
   const { products, loading, error } = useProducts(filters);
@@ -15,17 +15,14 @@ const ProductList = ({ initialFilters = {}, onFilterChange }) => {
 
   const handleFilterChange = (e) => {
     const { name, value } = e.target;
-    const newFilters = {
-      ...filters,
+    setFilters((prev) => ({
+      ...prev,
       [name]: value === 'all' ? undefined : value,
-    };
-    setFilters(newFilters);
-    onFilterChange?.(newFilters);
+    }));
   };
 
   const clearFilters = () => {
     setFilters({});
-    onFilterChange?.({});
   };
 
   const toggleFilters = () => {
@@ -117,13 +114,11 @@ const ProductList = ({ initialFilters = {}, onFilterChange }) => {
                     value="all"
                     checked={!filters.minPrice && !filters.maxPrice}
                     onChange={() => {
-                      const newFilters = {
-                        ...filters,
+                      setFilters((prev) => ({
+                        ...prev,
                         minPrice: undefined,
                         maxPrice: undefined,
-                      };
-                      setFilters(newFilters);
-                      onFilterChange?.(newFilters);
+                      }));
                     }}
                     className="mr-2"
                   />
@@ -136,13 +131,11 @@ const ProductList = ({ initialFilters = {}, onFilterChange }) => {
                     value="0-100"
                     checked={filters.minPrice === '0' && filters.maxPrice === '100'}
                     onChange={() => {
-                      const newFilters = {
-                        ...filters,
+                      setFilters((prev) => ({
+                        ...prev,
                         minPrice: '0',
                         maxPrice: '100',
-                      };
-                      setFilters(newFilters);
-                      onFilterChange?.(newFilters);
+                      }));
                     }}
                     className="mr-2"
                   />
@@ -155,13 +148,11 @@ const ProductList = ({ initialFilters = {}, onFilterChange }) => {
                     value="100-300"
                     checked={filters.minPrice === '100' && filters.maxPrice === '300'}
                     onChange={() => {
-                      const newFilters = {
-                        ...filters,
+                      setFilters((prev) => ({
+                        ...prev,
                         minPrice: '100',
                         maxPrice: '300',
-                      };
-                      setFilters(newFilters);
-                      onFilterChange?.(newFilters);
+                      }));
                     }}
                     className="mr-2"
                   />
@@ -174,13 +165,11 @@ const ProductList = ({ initialFilters = {}, onFilterChange }) => {
                     value="300-500"
                     checked={filters.minPrice === '300' && filters.maxPrice === '500'}
                     onChange={() => {
-                      const newFilters = {
-                        ...filters,
+                      setFilters((prev) => ({
+                        ...prev,
                         minPrice: '300',
                         maxPrice: '500',
-                      };
-                      setFilters(newFilters);
-                      onFilterChange?.(newFilters);
+                      }));
                     }}
                     className="mr-2"
                   />
@@ -193,13 +182,11 @@ const ProductList = ({ initialFilters = {}, onFilterChange }) => {
                     value="500+"
                     checked={filters.minPrice === '500' && !filters.maxPrice}
                     onChange={() => {
-                      const newFilters = {
-                        ...filters,
+                      setFilters((prev) => ({
+                        ...prev,
                         minPrice: '500',
                         maxPrice: undefined,
-                      };
-                      setFilters(newFilters);
-                      onFilterChange?.(newFilters);
+                      }));
                     }}
                     className="mr-2"
                   />
@@ -316,13 +303,11 @@ const ProductList = ({ initialFilters = {}, onFilterChange }) => {
                         value="all"
                         checked={!filters.minPrice && !filters.maxPrice}
                         onChange={() => {
-                          const newFilters = {
-                            ...filters,
+                          setFilters((prev) => ({
+                            ...prev,
                             minPrice: undefined,
                             maxPrice: undefined,
-                          };
-                          setFilters(newFilters);
-                          onFilterChange?.(newFilters);
+                          }));
                         }}
                         className="mr-2"
                       />
@@ -335,13 +320,11 @@ const ProductList = ({ initialFilters = {}, onFilterChange }) => {
                         value="0-100"
                         checked={filters.minPrice === '0' && filters.maxPrice === '100'}
                         onChange={() => {
-                          const newFilters = {
-                            ...filters,
+                          setFilters((prev) => ({
+                            ...prev,
                             minPrice: '0',
                             maxPrice: '100',
-                          };
-                          setFilters(newFilters);
-                          onFilterChange?.(newFilters);
+                          }));
                         }}
                         className="mr-2"
                       />
@@ -354,13 +337,11 @@ const ProductList = ({ initialFilters = {}, onFilterChange }) => {
                         value="100-300"
                         checked={filters.minPrice === '100' && filters.maxPrice === '300'}
                         onChange={() => {
-                          const newFilters = {
-                            ...filters,
+                          setFilters((prev) => ({
+                            ...prev,
                             minPrice: '100',
                             maxPrice: '300',
-                          };
-                          setFilters(newFilters);
-                          onFilterChange?.(newFilters);
+                          }));
                         }}
                         className="mr-2"
                       />
@@ -373,13 +354,11 @@ const ProductList = ({ initialFilters = {}, onFilterChange }) => {
                         value="300-500"
                         checked={filters.minPrice === '300' && filters.maxPrice === '500'}
                         onChange={() => {
-                          const newFilters = {
-                            ...filters,
+                          setFilters((prev) => ({
+                            ...prev,
                             minPrice: '300',
                             maxPrice: '500',
-                          };
-                          setFilters(newFilters);
-                          onFilterChange?.(newFilters);
+                          }));
                         }}
                         className="mr-2"
                       />
@@ -392,13 +371,11 @@ const ProductList = ({ initialFilters = {}, onFilterChange }) => {
                         value="500+"
                         checked={filters.minPrice === '500' && !filters.maxPrice}
                         onChange={() => {
-                          const newFilters = {
-                            ...filters,
+                          setFilters((prev) => ({
+                            ...prev,
                             minPrice: '500',
                             maxPrice: undefined,
-                          };
-                          setFilters(newFilters);
-                          onFilterChange?.(newFilters);
+                          }));
                         }}
                         className="mr-2"
                       />
@@ -442,12 +419,10 @@ const ProductList = ({ initialFilters = {}, onFilterChange }) => {
                   Category: {filters.category === 'ac' ? 'Air Conditioner' : 'Fan'}
                   <button
                     onClick={() => {
-                      const newFilters = {
-                        ...filters,
+                      setFilters((prev) => ({
+                        ...prev,
                         category: undefined,
-                      };
-                      setFilters(newFilters);
-                      onFilterChange?.(newFilters);
+                      }));
                     }}
                     className="ml-1 text-primary-600 hover:text-primary-800"
                   >
@@ -463,13 +438,11 @@ const ProductList = ({ initialFilters = {}, onFilterChange }) => {
                     : ` ${filters.minPrice} - ${filters.maxPrice}`}
                   <button
                     onClick={() => {
-                      const newFilters = {
-                        ...filters,
+                      setFilters((prev) => ({
+                        ...prev,
                         minPrice: undefined,
                         maxPrice: undefined,
-                      };
-                      setFilters(newFilters);
-                      onFilterChange?.(newFilters);
+                      }));
                     }}
                     className="ml-1 text-primary-600 hover:text-primary-800"
                   >
