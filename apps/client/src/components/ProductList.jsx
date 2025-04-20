@@ -7,7 +7,18 @@ import { FiFilter, FiX } from 'react-icons/fi';
 const ProductList = ({ initialFilters = {} }) => {
   const [filters, setFilters] = useState(initialFilters);
   const [showFilters, setShowFilters] = useState(false);
-  const { products, loading, error } = useProducts(filters);
+  const { products, loading, error, searchParams, setSearchParams } = useProducts(filters);
+
+  useEffect(() => {
+    // Sync URL parameters with filters
+    const urlCategory = searchParams.get('category');
+    if (urlCategory && urlCategory !== filters.category) {
+      setFilters((prev) => ({
+        ...prev,
+        category: urlCategory,
+      }));
+    }
+  }, [searchParams]);
 
   useEffect(() => {
     setFilters(initialFilters);
@@ -15,14 +26,27 @@ const ProductList = ({ initialFilters = {} }) => {
 
   const handleFilterChange = (e) => {
     const { name, value } = e.target;
+    const newValue = value === 'all' ? undefined : value;
+
+    // Update URL parameters for category changes
+    if (name === 'category') {
+      if (newValue) {
+        setSearchParams({ ...Object.fromEntries(searchParams), category: newValue });
+      } else {
+        searchParams.delete('category');
+        setSearchParams(searchParams);
+      }
+    }
+
     setFilters((prev) => ({
       ...prev,
-      [name]: value === 'all' ? undefined : value,
+      [name]: newValue,
     }));
   };
 
   const clearFilters = () => {
     setFilters({});
+    setSearchParams({});
   };
 
   const toggleFilters = () => {

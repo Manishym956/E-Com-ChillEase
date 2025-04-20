@@ -5,7 +5,7 @@ import { FiWind } from 'react-icons/fi';
 import { FaFan } from 'react-icons/fa';
 
 const HomePage = () => {
-  const [searchParams] = useSearchParams();
+  const [searchParams, setSearchParams] = useSearchParams();
   const [filters, setFilters] = useState({});
 
   // Extract filters from URL params
@@ -26,6 +26,12 @@ const HomePage = () => {
     setFilters(newFilters);
   }, [searchParams]);
 
+  const handleShopCategory = (category) => (e) => {
+    e.preventDefault();
+    setSearchParams({ category });
+    document.getElementById('products')?.scrollIntoView({ behavior: 'smooth' });
+  };
+
   return (
     <div>
       {/* Hero section */}
@@ -41,12 +47,18 @@ const HomePage = () => {
                 Find the perfect cooling solution for every space.
               </p>
               <div className="flex flex-wrap gap-4">
-                <a href="/?category=fan" className="btn bg-white text-primary-600 hover:bg-gray-100">
+                <button 
+                  onClick={handleShopCategory('fan')} 
+                  className="btn bg-white text-primary-600 hover:bg-gray-100"
+                >
                   Shop Fans
-                </a>
-                <a href="/?category=ac" className="btn bg-white/10 text-white hover:bg-white/20">
+                </button>
+                <button 
+                  onClick={handleShopCategory('ac')} 
+                  className="btn bg-white/10 text-white hover:bg-white/20"
+                >
                   Shop ACs
-                </a>
+                </button>
               </div>
             </div>
             <div className="hidden md:block">
@@ -90,7 +102,7 @@ const HomePage = () => {
       </section>
 
       {/* Products section */}
-      <section>
+      <section id="products" className="scroll-mt-16">
         <h2 className="text-2xl font-bold mb-6">Our Products</h2>
         <ProductList initialFilters={filters} />
       </section>

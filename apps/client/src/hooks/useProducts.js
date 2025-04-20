@@ -1,32 +1,40 @@
 // apps/client/src/hooks/useProducts.js
 import { useState, useEffect } from 'react';
+import { useSearchParams } from 'react-router-dom';
 import { getAllProducts, getProductById } from '../services/productService';
 
-export function useProducts(filters = {}) {
+export const useProducts = (filters = {}) => {
   const [products, setProducts] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const [searchParams, setSearchParams] = useSearchParams();
 
   useEffect(() => {
     const fetchProducts = async () => {
       try {
         setLoading(true);
-        const data = await getAllProducts(filters);
+        // Combine URL params with filters
+        const urlCategory = searchParams.get('category');
+        const combinedFilters = {
+          ...filters,
+          category: urlCategory || filters.category
+        };
+        const data = await getAllProducts(combinedFilters);
         setProducts(data);
         setError(null);
       } catch (err) {
-        setError('Failed to fetch products');
-        console.error(err);
+        setError(err.message);
+        setProducts([]);
       } finally {
         setLoading(false);
       }
     };
 
     fetchProducts();
-  }, [filters]);
+  }, [filters, searchParams]);
 
-  return { products, loading, error };
-}
+  return { products, loading, error, searchParams, setSearchParams };
+};
 
 export function useProduct(id) {
   const [product, setProduct] = useState(null);

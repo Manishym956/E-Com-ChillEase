@@ -1,6 +1,6 @@
 // apps/client/src/components/Header.jsx
 import { useState, useEffect, useRef } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, useNavigate, useSearchParams } from 'react-router-dom';
 import { FiShoppingCart, FiUser, FiMenu, FiX } from 'react-icons/fi';
 import { useAuth } from '../hooks/useAuth';
 import { useCart } from '../hooks/useCart';
@@ -13,6 +13,7 @@ const Header = () => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const dropdownRef = useRef(null);
+  const [searchParams, setSearchParams] = useSearchParams();
 
   useEffect(() => {
     const handleClickOutside = (event) => {
@@ -37,6 +38,26 @@ const Header = () => {
     navigate('/');
   };
 
+  const handleCategoryClick = (category) => (e) => {
+    e.preventDefault();
+    setSearchParams({ category });
+    navigate(`/?category=${category}`);
+    setMobileMenuOpen(false);
+    
+    // Smooth scroll to products section
+    const productsSection = document.getElementById('products');
+    if (productsSection) {
+      productsSection.scrollIntoView({ behavior: 'smooth' });
+    }
+  };
+
+  const handleHomeClick = (e) => {
+    e.preventDefault();
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+    navigate('/');
+    setMobileMenuOpen(false);
+  };
+
   const totalItems = cartItems.reduce((acc, item) => acc + item.qty, 0);
 
   return (
@@ -44,15 +65,27 @@ const Header = () => {
       <div className="container mx-auto px-4">
         <div className="flex justify-between items-center h-16">
           {/* Logo */}
-          <Link to="/" className="flex items-center space-x-2">
+          <Link to="/" onClick={handleHomeClick} className="flex items-center space-x-2">
             <span className="text-primary-600 text-2xl font-bold">ChillEase</span>
           </Link>
 
           {/* Desktop Navigation */}
           <nav className="hidden md:flex items-center space-x-6">
-            <Link to="/" className="text-gray-700 hover:text-primary-600">Home</Link>
-            <Link to="/?category=fan" className="text-gray-700 hover:text-primary-600">Fans</Link>
-            <Link to="/?category=ac" className="text-gray-700 hover:text-primary-600">ACs</Link>
+            <button onClick={handleHomeClick} className="text-gray-700 hover:text-primary-600">
+              Home
+            </button>
+            <button 
+              onClick={handleCategoryClick('fan')} 
+              className="text-gray-700 hover:text-primary-600"
+            >
+              Fans
+            </button>
+            <button 
+              onClick={handleCategoryClick('ac')} 
+              className="text-gray-700 hover:text-primary-600"
+            >
+              ACs
+            </button>
           </nav>
 
           {/* Cart and User */}
@@ -118,27 +151,24 @@ const Header = () => {
         {/* Mobile Menu */}
         {mobileMenuOpen && (
           <nav className="md:hidden py-4 border-t">
-            <Link 
-              to="/" 
-              className="block py-2 text-gray-700 hover:text-primary-600"
-              onClick={() => setMobileMenuOpen(false)}
+            <button 
+              onClick={handleHomeClick}
+              className="block w-full text-left py-2 text-gray-700 hover:text-primary-600"
             >
               Home
-            </Link>
-            <Link 
-              to="/?category=fan" 
-              className="block py-2 text-gray-700 hover:text-primary-600"
-              onClick={() => setMobileMenuOpen(false)}
+            </button>
+            <button 
+              onClick={handleCategoryClick('fan')}
+              className="block w-full text-left py-2 text-gray-700 hover:text-primary-600"
             >
               Fans
-            </Link>
-            <Link 
-              to="/?category=ac" 
-              className="block py-2 text-gray-700 hover:text-primary-600"
-              onClick={() => setMobileMenuOpen(false)}
+            </button>
+            <button 
+              onClick={handleCategoryClick('ac')}
+              className="block w-full text-left py-2 text-gray-700 hover:text-primary-600"
             >
               ACs
-            </Link>
+            </button>
             {user && (
               <>
                 <Link 
