@@ -8,21 +8,21 @@ const Sidebar = ({ open, toggleSidebar }) => {
       {/* Mobile sidebar backdrop */}
       {open && (
         <div
-          className="fixed inset-0 z-40 bg-gray-600 bg-opacity-75 md:hidden"
+          className="fixed inset-0 z-40 bg-primary-900/50 md:hidden"
           onClick={toggleSidebar}
         ></div>
       )}
 
       {/* Sidebar */}
       <aside
-        className={`fixed inset-y-0 left-0 z-50 w-64 bg-white shadow-md transform transition-transform duration-300 ease-in-out md:translate-x-0 md:static md:inset-auto md:z-auto ${
+        className={`fixed inset-y-0 left-0 z-50 w-64 bg-warm-50 border-r border-warm-100 shadow-md transform transition-transform duration-300 ease-in-out md:translate-x-0 md:static md:inset-auto md:z-auto ${
           open ? 'translate-x-0' : '-translate-x-full'
         }`}
       >
         <div className="h-full flex flex-col">
           {/* Sidebar header */}
-          <div className="h-16 flex items-center justify-between px-4 border-b">
-            <span className="font-bold text-xl text-primary-600">ChillEase</span>
+          <div className="h-16 flex items-center justify-between px-4 border-b border-warm-100">
+            <span className="font-bold text-xl text-primary-700">ChillEase</span>
             <button
               onClick={toggleSidebar}
               className="md:hidden text-gray-500 hover:text-gray-600"
@@ -38,8 +38,10 @@ const Sidebar = ({ open, toggleSidebar }) => {
                 <NavLink
                   to="/"
                   className={({ isActive }) =>
-                    `flex items-center px-4 py-2 text-gray-700 rounded-md ${
-                      isActive ? 'bg-primary-100 text-primary-700' : 'hover:bg-gray-100'
+                    `flex items-center px-4 py-2 rounded-md ${
+                      isActive 
+                        ? 'bg-warm-100 text-primary-700' 
+                        : 'text-primary-600 hover:bg-warm-50'
                     }`
                   }
                   end
@@ -52,8 +54,10 @@ const Sidebar = ({ open, toggleSidebar }) => {
                 <NavLink
                   to="/orders"
                   className={({ isActive }) =>
-                    `flex items-center px-4 py-2 text-gray-700 rounded-md ${
-                      isActive ? 'bg-primary-100 text-primary-700' : 'hover:bg-gray-100'
+                    `flex items-center px-4 py-2 rounded-md ${
+                      isActive 
+                        ? 'bg-warm-100 text-primary-700' 
+                        : 'text-primary-600 hover:bg-warm-50'
                     }`
                   }
                 >
@@ -65,8 +69,10 @@ const Sidebar = ({ open, toggleSidebar }) => {
                 <NavLink
                   to="/riders"
                   className={({ isActive }) =>
-                    `flex items-center px-4 py-2 text-gray-700 rounded-md ${
-                      isActive ? 'bg-primary-100 text-primary-700' : 'hover:bg-gray-100'
+                    `flex items-center px-4 py-2 rounded-md ${
+                      isActive 
+                        ? 'bg-warm-100 text-primary-700' 
+                        : 'text-primary-600 hover:bg-warm-50'
                     }`
                   }
                 >

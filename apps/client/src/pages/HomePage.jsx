@@ -33,29 +33,29 @@ const HomePage = () => {
   };
 
   return (
-    <div>
+    <div className="bg-cool-100">
       {/* Hero section */}
-      <section className="bg-primary-600 text-white rounded-lg overflow-hidden mb-8">
+      <section className="bg-gradient-to-r from-warm-100 to-cool-100 rounded-lg overflow-hidden mb-8">
         <div className="container mx-auto px-4 py-12 md:py-20">
           <div className="grid md:grid-cols-2 gap-8 items-center">
             <div>
-              <h1 className="text-3xl md:text-4xl font-bold mb-4">
+              <h1 className="text-3xl md:text-4xl font-bold mb-4 text-primary-700">
                 Stay Cool and Comfortable Year-Round
               </h1>
-              <p className="text-lg mb-6">
+              <p className="text-lg mb-6 text-primary-600">
                 Premium quality fans and air conditioners for your home and office. 
                 Find the perfect cooling solution for every space.
               </p>
               <div className="flex flex-wrap gap-4">
                 <button 
                   onClick={handleShopCategory('fan')} 
-                  className="btn bg-white text-primary-600 hover:bg-gray-100"
+                  className="btn bg-warm-400 text-white hover:bg-warm-500 transition-colors"
                 >
                   Shop Fans
                 </button>
                 <button 
                   onClick={handleShopCategory('ac')} 
-                  className="btn bg-white/10 text-white hover:bg-white/20"
+                  className="btn bg-cool-400 text-white hover:bg-cool-500 transition-colors"
                 >
                   Shop ACs
                 </button>
@@ -74,36 +74,36 @@ const HomePage = () => {
 
       {/* Categories section */}
       <section className="mb-12">
-        <h2 className="text-2xl font-bold mb-6">Shop by Category</h2>
+        <h2 className="text-2xl font-bold mb-6 text-primary-700">Shop by Category</h2>
         <div className="grid md:grid-cols-2 gap-6">
-          <a
-            href="/?category=fan"
-            className="group relative bg-gray-100 rounded-lg overflow-hidden h-48 flex items-center justify-center"
+          <button
+            onClick={handleShopCategory('fan')}
+            className="group relative bg-warm-100 rounded-lg overflow-hidden h-48 flex items-center justify-center hover:bg-warm-200 transition-colors"
           >
-            <div className="absolute inset-0 bg-gradient-to-r from-primary-500/20 to-primary-700/20 group-hover:from-primary-500/30 group-hover:to-primary-700/30 transition-colors"></div>
+            <div className="absolute inset-0 bg-gradient-to-r from-warm-200/50 to-cool-100/30 group-hover:from-warm-300/50 group-hover:to-cool-200/30 transition-colors"></div>
             <div className="text-center z-10">
-              <FaFan className="w-12 h-12 mx-auto mb-2 text-primary-600" />
-              <h3 className="text-xl font-bold">Fans</h3>
-              <p className="text-gray-600">Ceiling, Tower, Table & more</p>
+              <FaFan className="w-12 h-12 mx-auto mb-2 text-warm-400" />
+              <h3 className="text-xl font-bold text-primary-700">Fans</h3>
+              <p className="text-primary-600">Ceiling, Tower, Table & more</p>
             </div>
-          </a>
-          <a
-            href="/?category=ac"
-            className="group relative bg-gray-100 rounded-lg overflow-hidden h-48 flex items-center justify-center"
+          </button>
+          <button
+            onClick={handleShopCategory('ac')}
+            className="group relative bg-cool-100 rounded-lg overflow-hidden h-48 flex items-center justify-center hover:bg-cool-200 transition-colors"
           >
-            <div className="absolute inset-0 bg-gradient-to-r from-primary-500/20 to-primary-700/20 group-hover:from-primary-500/30 group-hover:to-primary-700/30 transition-colors"></div>
+            <div className="absolute inset-0 bg-gradient-to-r from-cool-200/50 to-warm-100/30 group-hover:from-cool-300/50 group-hover:to-warm-200/30 transition-colors"></div>
             <div className="text-center z-10">
-              <FiWind className="w-12 h-12 mx-auto mb-2 text-primary-600" />
-              <h3 className="text-xl font-bold">Air Conditioners</h3>
-              <p className="text-gray-600">Split, Window, Portable & more</p>
+              <FiWind className="w-12 h-12 mx-auto mb-2 text-cool-400" />
+              <h3 className="text-xl font-bold text-primary-700">Air Conditioners</h3>
+              <p className="text-primary-600">Split, Window, Portable & more</p>
             </div>
-          </a>
+          </button>
         </div>
       </section>
 
       {/* Products section */}
       <section id="products" className="scroll-mt-16">
-        <h2 className="text-2xl font-bold mb-6">Our Products</h2>
+        <h2 className="text-2xl font-bold mb-6 text-primary-700">Our Products</h2>
         <ProductList initialFilters={filters} />
       </section>
     </div>

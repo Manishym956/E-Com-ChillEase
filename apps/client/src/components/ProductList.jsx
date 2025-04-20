@@ -17,6 +17,8 @@ const ProductList = ({ initialFilters = {} }) => {
         ...prev,
         category: urlCategory,
       }));
+      // Add smooth scrolling
+      document.getElementById('products')?.scrollIntoView({ behavior: 'smooth' });
     }
   }, [searchParams]);
 
@@ -73,13 +75,13 @@ const ProductList = ({ initialFilters = {} }) => {
     <div className="grid md:grid-cols-12 gap-6">
       {/* Filter sidebar - visible on MD and above */}
       <div className="hidden md:block md:col-span-3 lg:col-span-2">
-        <div className="bg-white p-4 rounded shadow-sm">
+        <div className="bg-warm-50 p-4 rounded shadow-sm border border-warm-100">
           <div className="flex justify-between items-center mb-4">
-            <h3 className="text-lg font-medium">Filters</h3>
+            <h3 className="text-lg font-medium text-primary-700">Filters</h3>
             {Object.keys(filters).length > 0 && (
               <button
                 onClick={clearFilters}
-                className="text-sm text-primary-600 hover:text-primary-800"
+                className="text-sm text-warm-500 hover:text-warm-400"
               >
                 Clear All
               </button>
@@ -89,7 +91,7 @@ const ProductList = ({ initialFilters = {} }) => {
           <div className="space-y-6">
             {/* Category */}
             <div>
-              <h4 className="text-sm font-medium text-gray-700 mb-2">Category</h4>
+              <h4 className="text-sm font-medium text-primary-600 mb-2">Category</h4>
               <div className="space-y-1">
                 <label className="flex items-center">
                   <input
@@ -129,7 +131,7 @@ const ProductList = ({ initialFilters = {} }) => {
 
             {/* Price Range */}
             <div>
-              <h4 className="text-sm font-medium text-gray-700 mb-2">Price Range</h4>
+              <h4 className="text-sm font-medium text-primary-600 mb-2">Price Range</h4>
               <div className="space-y-1">
                 <label className="flex items-center">
                   <input
@@ -221,12 +223,12 @@ const ProductList = ({ initialFilters = {} }) => {
 
             {/* Sorting */}
             <div>
-              <h4 className="text-sm font-medium text-gray-700 mb-2">Sort By</h4>
+              <h4 className="text-sm font-medium text-primary-600 mb-2">Sort By</h4>
               <select
                 name="sort"
                 value={filters.sort || 'newest'}
                 onChange={handleFilterChange}
-                className="w-full p-2 border border-gray-300 rounded text-sm"
+                className="w-full p-2 border border-warm-200 rounded text-sm bg-white text-primary-700 focus:border-warm-400 focus:ring-1 focus:ring-warm-400"
               >
                 <option value="newest">Newest</option>
                 <option value="price-low">Price: Low to High</option>
@@ -239,12 +241,12 @@ const ProductList = ({ initialFilters = {} }) => {
       </div>
 
       {/* Product grid */}
-      <div className="col-span-12 md:col-span-9 lg:col-span-10">
+      <div id="products" className="col-span-12 md:col-span-9 lg:col-span-10">
         {/* Mobile filter button */}
         <div className="md:hidden mb-4 flex justify-between items-center">
           <button
             onClick={toggleFilters}
-            className="flex items-center space-x-1 bg-white px-3 py-2 rounded shadow-sm text-sm"
+            className="flex items-center space-x-1 bg-warm-50 border border-warm-100 px-3 py-2 rounded text-primary-700 hover:bg-warm-100"
           >
             <FiFilter className="w-4 h-4" />
             <span>Filters</span>
@@ -255,7 +257,7 @@ const ProductList = ({ initialFilters = {} }) => {
             name="sort"
             value={filters.sort || 'newest'}
             onChange={handleFilterChange}
-            className="p-2 border border-gray-300 rounded text-sm bg-white"
+            className="p-2 border border-warm-200 rounded text-sm bg-white text-primary-700"
           >
             <option value="newest">Newest</option>
             <option value="price-low">Price: Low to High</option>
@@ -266,19 +268,19 @@ const ProductList = ({ initialFilters = {} }) => {
 
         {/* Mobile filter sidebar */}
         {showFilters && (
-          <div className="md:hidden fixed inset-0 bg-black bg-opacity-50 z-50 flex">
-            <div className="bg-white w-4/5 max-w-sm h-full overflow-auto">
-              <div className="p-4 border-b sticky top-0 bg-white z-10 flex justify-between items-center">
-                <h3 className="text-lg font-medium">Filters</h3>
+          <div className="md:hidden fixed inset-0 bg-primary-900/50 z-50 flex">
+            <div className="bg-warm-50 w-4/5 max-w-sm h-full overflow-auto">
+              <div className="p-4 border-b border-warm-100 sticky top-0 bg-warm-50 z-10 flex justify-between items-center">
+                <h3 className="text-lg font-medium text-primary-700">Filters</h3>
                 <button onClick={toggleFilters}>
-                  <FiX className="w-5 h-5" />
+                  <FiX className="w-5 h-5 text-primary-600" />
                 </button>
               </div>
 
               <div className="p-4 space-y-6">
                 {/* Category */}
                 <div>
-                  <h4 className="text-sm font-medium text-gray-700 mb-2">Category</h4>
+                  <h4 className="text-sm font-medium text-primary-600 mb-2">Category</h4>
                   <div className="space-y-2">
                     <label className="flex items-center">
                       <input
@@ -318,7 +320,7 @@ const ProductList = ({ initialFilters = {} }) => {
 
                 {/* Price Range */}
                 <div>
-                  <h4 className="text-sm font-medium text-gray-700 mb-2">Price Range</h4>
+                  <h4 className="text-sm font-medium text-primary-600 mb-2">Price Range</h4>
                   <div className="space-y-2">
                     <label className="flex items-center">
                       <input
@@ -409,17 +411,17 @@ const ProductList = ({ initialFilters = {} }) => {
                 </div>
               </div>
 
-              <div className="p-4 border-t sticky bottom-0 bg-white">
+              <div className="p-4 border-t border-warm-100 sticky bottom-0 bg-warm-50">
                 <div className="flex space-x-2">
                   <button
                     onClick={clearFilters}
-                    className="btn-secondary flex-1"
+                    className="btn-secondary flex-1 bg-cool-100 text-primary-600 hover:bg-cool-200"
                   >
                     Clear
                   </button>
                   <button
                     onClick={toggleFilters}
-                    className="btn-primary flex-1"
+                    className="btn-primary flex-1 bg-warm-400 text-white hover:bg-warm-500"
                   >
                     Apply
                   </button>
@@ -431,7 +433,7 @@ const ProductList = ({ initialFilters = {} }) => {
 
         {/* Results count and applied filters */}
         <div className="mb-4 flex flex-wrap items-center justify-between">
-          <p className="text-gray-600 mb-2">
+          <p className="text-primary-600 mb-2">
             Showing {products.length} products
           </p>
 
@@ -439,7 +441,7 @@ const ProductList = ({ initialFilters = {} }) => {
           {Object.keys(filters).length > 0 && (
             <div className="flex flex-wrap gap-2">
               {filters.category && (
-                <div className="bg-primary-100 text-primary-800 text-sm px-3 py-1 rounded-full flex items-center">
+                <div className="bg-warm-100 text-primary-700 text-sm px-3 py-1 rounded-full flex items-center">
                   Category: {filters.category === 'ac' ? 'Air Conditioner' : 'Fan'}
                   <button
                     onClick={() => {
@@ -448,14 +450,14 @@ const ProductList = ({ initialFilters = {} }) => {
                         category: undefined,
                       }));
                     }}
-                    className="ml-1 text-primary-600 hover:text-primary-800"
+                    className="ml-1 text-warm-500 hover:text-warm-400"
                   >
                     <FiX className="w-4 h-4" />
                   </button>
                 </div>
               )}
               {filters.minPrice && (
-                <div className="bg-primary-100 text-primary-800 text-sm px-3 py-1 rounded-full flex items-center">
+                <div className="bg-warm-100 text-primary-700 text-sm px-3 py-1 rounded-full flex items-center">
                   Price: 
                   {filters.minPrice && !filters.maxPrice 
                     ? ` ${filters.minPrice}+`
@@ -468,7 +470,7 @@ const ProductList = ({ initialFilters = {} }) => {
                         maxPrice: undefined,
                       }));
                     }}
-                    className="ml-1 text-primary-600 hover:text-primary-800"
+                    className="ml-1 text-warm-500 hover:text-warm-400"
                   >
                     <FiX className="w-4 h-4" />
                   </button>
@@ -479,10 +481,10 @@ const ProductList = ({ initialFilters = {} }) => {
         </div>
 
         {products.length === 0 ? (
-          <div className="bg-gray-100 p-8 rounded text-center">
-            <h3 className="text-lg font-medium text-gray-900 mb-2">No products found</h3>
-            <p className="text-gray-600 mb-4">Try changing your filters or search term.</p>
-            <button onClick={clearFilters} className="btn-primary">
+          <div className="bg-cool-50 p-8 rounded text-center border border-cool-100">
+            <h3 className="text-lg font-medium text-primary-700 mb-2">No products found</h3>
+            <p className="text-primary-600 mb-4">Try changing your filters or search term.</p>
+            <button onClick={clearFilters} className="btn-primary bg-warm-400 text-white hover:bg-warm-500">
               Clear Filters
             </button>
           </div>
