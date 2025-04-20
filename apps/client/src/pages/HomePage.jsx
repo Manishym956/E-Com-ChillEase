@@ -1,30 +1,29 @@
-import { useEffect, useState } from 'react';
-import { useSearchParams } from 'react-router-dom';
+import { useState, useRef, useEffect } from 'react';
 import ProductList from '../components/ProductList';
+import CategoryDisplay from '../components/CategoryDisplay';
 import { FiWind } from 'react-icons/fi';
 import { FaFan } from 'react-icons/fa';
 
 const HomePage = () => {
-  const [searchParams] = useSearchParams();
+  const [currentCategory, setCurrentCategory] = useState(null);
   const [filters, setFilters] = useState({});
+  const productsRef = useRef(null);
 
-  // Extract filters from URL params
   useEffect(() => {
-    const category = searchParams.get('category');
-    const brand = searchParams.get('brand');
-    const minPrice = searchParams.get('minPrice');
-    const maxPrice = searchParams.get('maxPrice');
-    const sort = searchParams.get('sort');
+    const handleCategoryChange = (event) => {
+      const category = event.detail;
+      setCurrentCategory(category);
+      setFilters({ ...filters, category });
+    };
 
-    const newFilters = {};
-    if (category) newFilters.category = category;
-    if (brand) newFilters.brand = brand;
-    if (minPrice) newFilters.minPrice = minPrice;
-    if (maxPrice) newFilters.maxPrice = maxPrice;
-    if (sort) newFilters.sort = sort;
+    window.addEventListener('categoryChange', handleCategoryChange);
+    return () => window.removeEventListener('categoryChange', handleCategoryChange);
+  }, [filters]);
 
-    setFilters(newFilters);
-  }, [searchParams]);
+  const handleCategoryChange = (category) => {
+    setCurrentCategory(category);
+    productsRef.current?.scrollIntoView({ behavior: 'smooth' });
+  };
 
   return (
     <div>
@@ -41,12 +40,18 @@ const HomePage = () => {
                 Find the perfect cooling solution for every space.
               </p>
               <div className="flex flex-wrap gap-4">
-                <a href="/?category=fan" className="btn bg-white text-primary-600 hover:bg-gray-100">
+                <button 
+                  onClick={() => handleCategoryChange('fan')} 
+                  className="btn bg-white text-primary-600 hover:bg-gray-100"
+                >
                   Shop Fans
-                </a>
-                <a href="/?category=ac" className="btn bg-white/10 text-white hover:bg-white/20">
+                </button>
+                <button 
+                  onClick={() => handleCategoryChange('ac')} 
+                  className="btn bg-white/10 text-white hover:bg-white/20"
+                >
                   Shop ACs
-                </a>
+                </button>
               </div>
             </div>
             <div className="hidden md:block">
@@ -60,12 +65,12 @@ const HomePage = () => {
         </div>
       </section>
 
-      {/* Categories section */}
+      {/* Shop by Category section */}
       <section className="mb-12">
         <h2 className="text-2xl font-bold mb-6">Shop by Category</h2>
         <div className="grid md:grid-cols-2 gap-6">
-          <a
-            href="/?category=fan"
+          <button
+            onClick={() => handleCategoryChange('fan')}
             className="group relative bg-gray-100 rounded-lg overflow-hidden h-48 flex items-center justify-center"
           >
             <div className="absolute inset-0 bg-gradient-to-r from-primary-500/20 to-primary-700/20 group-hover:from-primary-500/30 group-hover:to-primary-700/30 transition-colors"></div>
@@ -74,9 +79,10 @@ const HomePage = () => {
               <h3 className="text-xl font-bold">Fans</h3>
               <p className="text-gray-600">Ceiling, Tower, Table & more</p>
             </div>
-          </a>
-          <a
-            href="/?category=ac"
+          </button>
+
+          <button
+            onClick={() => handleCategoryChange('ac')}
             className="group relative bg-gray-100 rounded-lg overflow-hidden h-48 flex items-center justify-center"
           >
             <div className="absolute inset-0 bg-gradient-to-r from-primary-500/20 to-primary-700/20 group-hover:from-primary-500/30 group-hover:to-primary-700/30 transition-colors"></div>
@@ -85,13 +91,18 @@ const HomePage = () => {
               <h3 className="text-xl font-bold">Air Conditioners</h3>
               <p className="text-gray-600">Split, Window, Portable & more</p>
             </div>
-          </a>
+          </button>
         </div>
       </section>
 
       {/* Products section */}
-      <section>
-        <h2 className="text-2xl font-bold mb-6">Our Products</h2>
+      <section ref={productsRef} id="products-section" className="scroll-mt-20">
+        <h2 className="text-2xl font-bold mb-6">
+          {currentCategory ? 
+            `${currentCategory === 'fan' ? 'Fans' : 'Air Conditioners'}` : 
+            'Our Products'
+          }
+        </h2>
         <ProductList initialFilters={filters} />
       </section>
     </div>

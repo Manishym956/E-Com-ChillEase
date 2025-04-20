@@ -1,8 +1,42 @@
 // apps/client/src/components/Footer.jsx
-import { Link } from 'react-router-dom';
+import { Link, useNavigate, useLocation } from 'react-router-dom';
 import { FiFacebook, FiTwitter, FiInstagram } from 'react-icons/fi';
 
 const Footer = () => {
+  const navigate = useNavigate();
+  const location = useLocation();
+
+  const handleHomeClick = () => {
+    if (location.pathname !== '/') {
+      navigate('/');
+    }
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+    window.dispatchEvent(new CustomEvent('categoryChange', { detail: null }));
+  };
+
+  const handleNavigation = (category = null) => {
+    if (location.pathname !== '/') {
+      navigate('/');
+      setTimeout(() => {
+        if (category) {
+          const productsSection = document.getElementById('products-section');
+          if (productsSection) {
+            productsSection.scrollIntoView({ behavior: 'smooth' });
+            window.dispatchEvent(new CustomEvent('categoryChange', { detail: category }));
+          }
+        }
+      }, 100);
+    } else {
+      if (category) {
+        const productsSection = document.getElementById('products-section');
+        if (productsSection) {
+          productsSection.scrollIntoView({ behavior: 'smooth' });
+          window.dispatchEvent(new CustomEvent('categoryChange', { detail: category }));
+        }
+      }
+    }
+  };
+
   const currentYear = new Date().getFullYear();
 
   return (
@@ -33,13 +67,19 @@ const Footer = () => {
             <h3 className="text-xl font-bold mb-4">Quick Links</h3>
             <ul className="space-y-2">
               <li>
-                <Link to="/" className="text-gray-400 hover:text-white">Home</Link>
+                <button onClick={handleHomeClick} className="text-gray-400 hover:text-white">
+                  Home
+                </button>
               </li>
               <li>
-                <Link to="/?category=fan" className="text-gray-400 hover:text-white">Fans</Link>
+                <button onClick={() => handleNavigation('fan')} className="text-gray-400 hover:text-white">
+                  Fans
+                </button>
               </li>
               <li>
-                <Link to="/?category=ac" className="text-gray-400 hover:text-white">Air Conditioners</Link>
+                <button onClick={() => handleNavigation('ac')} className="text-gray-400 hover:text-white">
+                  Air Conditioners
+                </button>
               </li>
               <li>
                 <Link to="/profile" className="text-gray-400 hover:text-white">My Account</Link>

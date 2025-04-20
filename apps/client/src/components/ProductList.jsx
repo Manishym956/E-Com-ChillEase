@@ -4,7 +4,7 @@ import ProductCard from './ProductCard';
 import { useProducts } from '../hooks/useProducts';
 import { FiFilter, FiX } from 'react-icons/fi';
 
-const ProductList = ({ initialFilters = {} }) => {
+const ProductList = ({ initialFilters = {}, onFilterChange }) => {
   const [filters, setFilters] = useState(initialFilters);
   const [showFilters, setShowFilters] = useState(false);
   const { products, loading, error } = useProducts(filters);
@@ -15,14 +15,17 @@ const ProductList = ({ initialFilters = {} }) => {
 
   const handleFilterChange = (e) => {
     const { name, value } = e.target;
-    setFilters((prev) => ({
-      ...prev,
+    const newFilters = {
+      ...filters,
       [name]: value === 'all' ? undefined : value,
-    }));
+    };
+    setFilters(newFilters);
+    onFilterChange?.(newFilters);
   };
 
   const clearFilters = () => {
     setFilters({});
+    onFilterChange?.({});
   };
 
   const toggleFilters = () => {
@@ -114,11 +117,13 @@ const ProductList = ({ initialFilters = {} }) => {
                     value="all"
                     checked={!filters.minPrice && !filters.maxPrice}
                     onChange={() => {
-                      setFilters((prev) => ({
-                        ...prev,
+                      const newFilters = {
+                        ...filters,
                         minPrice: undefined,
                         maxPrice: undefined,
-                      }));
+                      };
+                      setFilters(newFilters);
+                      onFilterChange?.(newFilters);
                     }}
                     className="mr-2"
                   />
@@ -131,11 +136,13 @@ const ProductList = ({ initialFilters = {} }) => {
                     value="0-100"
                     checked={filters.minPrice === '0' && filters.maxPrice === '100'}
                     onChange={() => {
-                      setFilters((prev) => ({
-                        ...prev,
+                      const newFilters = {
+                        ...filters,
                         minPrice: '0',
                         maxPrice: '100',
-                      }));
+                      };
+                      setFilters(newFilters);
+                      onFilterChange?.(newFilters);
                     }}
                     className="mr-2"
                   />
@@ -148,11 +155,13 @@ const ProductList = ({ initialFilters = {} }) => {
                     value="100-300"
                     checked={filters.minPrice === '100' && filters.maxPrice === '300'}
                     onChange={() => {
-                      setFilters((prev) => ({
-                        ...prev,
+                      const newFilters = {
+                        ...filters,
                         minPrice: '100',
                         maxPrice: '300',
-                      }));
+                      };
+                      setFilters(newFilters);
+                      onFilterChange?.(newFilters);
                     }}
                     className="mr-2"
                   />
@@ -165,11 +174,13 @@ const ProductList = ({ initialFilters = {} }) => {
                     value="300-500"
                     checked={filters.minPrice === '300' && filters.maxPrice === '500'}
                     onChange={() => {
-                      setFilters((prev) => ({
-                        ...prev,
+                      const newFilters = {
+                        ...filters,
                         minPrice: '300',
                         maxPrice: '500',
-                      }));
+                      };
+                      setFilters(newFilters);
+                      onFilterChange?.(newFilters);
                     }}
                     className="mr-2"
                   />
@@ -182,11 +193,13 @@ const ProductList = ({ initialFilters = {} }) => {
                     value="500+"
                     checked={filters.minPrice === '500' && !filters.maxPrice}
                     onChange={() => {
-                      setFilters((prev) => ({
-                        ...prev,
+                      const newFilters = {
+                        ...filters,
                         minPrice: '500',
                         maxPrice: undefined,
-                      }));
+                      };
+                      setFilters(newFilters);
+                      onFilterChange?.(newFilters);
                     }}
                     className="mr-2"
                   />
@@ -303,11 +316,13 @@ const ProductList = ({ initialFilters = {} }) => {
                         value="all"
                         checked={!filters.minPrice && !filters.maxPrice}
                         onChange={() => {
-                          setFilters((prev) => ({
-                            ...prev,
+                          const newFilters = {
+                            ...filters,
                             minPrice: undefined,
                             maxPrice: undefined,
-                          }));
+                          };
+                          setFilters(newFilters);
+                          onFilterChange?.(newFilters);
                         }}
                         className="mr-2"
                       />
@@ -320,11 +335,13 @@ const ProductList = ({ initialFilters = {} }) => {
                         value="0-100"
                         checked={filters.minPrice === '0' && filters.maxPrice === '100'}
                         onChange={() => {
-                          setFilters((prev) => ({
-                            ...prev,
+                          const newFilters = {
+                            ...filters,
                             minPrice: '0',
                             maxPrice: '100',
-                          }));
+                          };
+                          setFilters(newFilters);
+                          onFilterChange?.(newFilters);
                         }}
                         className="mr-2"
                       />
@@ -337,11 +354,13 @@ const ProductList = ({ initialFilters = {} }) => {
                         value="100-300"
                         checked={filters.minPrice === '100' && filters.maxPrice === '300'}
                         onChange={() => {
-                          setFilters((prev) => ({
-                            ...prev,
+                          const newFilters = {
+                            ...filters,
                             minPrice: '100',
                             maxPrice: '300',
-                          }));
+                          };
+                          setFilters(newFilters);
+                          onFilterChange?.(newFilters);
                         }}
                         className="mr-2"
                       />
@@ -354,11 +373,13 @@ const ProductList = ({ initialFilters = {} }) => {
                         value="300-500"
                         checked={filters.minPrice === '300' && filters.maxPrice === '500'}
                         onChange={() => {
-                          setFilters((prev) => ({
-                            ...prev,
+                          const newFilters = {
+                            ...filters,
                             minPrice: '300',
                             maxPrice: '500',
-                          }));
+                          };
+                          setFilters(newFilters);
+                          onFilterChange?.(newFilters);
                         }}
                         className="mr-2"
                       />
@@ -371,11 +392,13 @@ const ProductList = ({ initialFilters = {} }) => {
                         value="500+"
                         checked={filters.minPrice === '500' && !filters.maxPrice}
                         onChange={() => {
-                          setFilters((prev) => ({
-                            ...prev,
+                          const newFilters = {
+                            ...filters,
                             minPrice: '500',
                             maxPrice: undefined,
-                          }));
+                          };
+                          setFilters(newFilters);
+                          onFilterChange?.(newFilters);
                         }}
                         className="mr-2"
                       />
@@ -419,10 +442,12 @@ const ProductList = ({ initialFilters = {} }) => {
                   Category: {filters.category === 'ac' ? 'Air Conditioner' : 'Fan'}
                   <button
                     onClick={() => {
-                      setFilters((prev) => ({
-                        ...prev,
+                      const newFilters = {
+                        ...filters,
                         category: undefined,
-                      }));
+                      };
+                      setFilters(newFilters);
+                      onFilterChange?.(newFilters);
                     }}
                     className="ml-1 text-primary-600 hover:text-primary-800"
                   >
@@ -438,11 +463,13 @@ const ProductList = ({ initialFilters = {} }) => {
                     : ` ${filters.minPrice} - ${filters.maxPrice}`}
                   <button
                     onClick={() => {
-                      setFilters((prev) => ({
-                        ...prev,
+                      const newFilters = {
+                        ...filters,
                         minPrice: undefined,
                         maxPrice: undefined,
-                      }));
+                      };
+                      setFilters(newFilters);
+                      onFilterChange?.(newFilters);
                     }}
                     className="ml-1 text-primary-600 hover:text-primary-800"
                   >
