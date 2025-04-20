@@ -1,6 +1,6 @@
 // apps/admin/src/pages/OrdersPage.jsx
-import { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { useState, useEffect } from 'react';
+import { Link, useSearchParams } from 'react-router-dom';
 import { FiEye, FiSearch } from 'react-icons/fi';
 import { useOrders } from '../hooks/useOrders';
 import StatusBadge from '../components/StatusBadge';
@@ -8,9 +8,18 @@ import Loader from '../components/Loader';
 import EmptyState from '../components/EmptyState';
 
 const OrdersPage = () => {
+  const [searchParams] = useSearchParams();
   const { orders, loading, error } = useOrders();
   const [searchTerm, setSearchTerm] = useState('');
-  const [filterStatus, setFilterStatus] = useState('');
+  const [filterStatus, setFilterStatus] = useState(searchParams.get('status') || '');
+
+  // Update filter when URL changes
+  useEffect(() => {
+    const status = searchParams.get('status');
+    if (status) {
+      setFilterStatus(status);
+    }
+  }, [searchParams]);
 
   const handleSearchChange = (e) => {
     setSearchTerm(e.target.value);
@@ -28,9 +37,9 @@ const OrdersPage = () => {
       (order.user?.name && order.user.name.toLowerCase().includes(searchTerm.toLowerCase())) ||
       (order.user?.email && order.user.email.toLowerCase().includes(searchTerm.toLowerCase()));
 
-    const matchesFilter = filterStatus === '' || order.status === filterStatus;
+    const matchesStatus = !filterStatus || order.status === filterStatus;
 
-    return matchesSearch && matchesFilter;
+    return matchesSearch && matchesStatus;
   });
 
   if (loading) {

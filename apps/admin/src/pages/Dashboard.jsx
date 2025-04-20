@@ -1,5 +1,6 @@
 // apps/admin/src/pages/Dashboard.jsx
 import { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { FiPackage, FiTruck, FiCheckCircle, FiXCircle } from 'react-icons/fi';
 import { Link } from 'react-router-dom';
 import { useOrders } from '../hooks/useOrders';
@@ -7,6 +8,7 @@ import Loader from '../components/Loader';
 
 const Dashboard = () => {
   const { orders, loading, error } = useOrders();
+  const navigate = useNavigate();
   const [stats, setStats] = useState({
     total: 0,
     paid: 0,
@@ -28,6 +30,10 @@ const Dashboard = () => {
     }
   }, [orders]);
 
+  const handleCardClick = (status) => {
+    navigate(`/orders${status ? `?status=${status}` : ''}`);
+  };
+
   if (loading) {
     return <Loader />;
   }
@@ -46,7 +52,10 @@ const Dashboard = () => {
 
       {/* Stats */}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
-        <div className="bg-white rounded-lg shadow-sm p-6">
+        <div 
+          onClick={() => handleCardClick()}
+          className="bg-white rounded-lg shadow-sm p-6 cursor-pointer hover:shadow-md transition-shadow"
+        >
           <div className="flex items-center">
             <div className="p-3 rounded-full bg-blue-100 text-blue-600 mr-4">
               <FiPackage className="h-6 w-6" />
@@ -58,7 +67,10 @@ const Dashboard = () => {
           </div>
         </div>
 
-        <div className="bg-white rounded-lg shadow-sm p-6">
+        <div 
+          onClick={() => handleCardClick('Paid')}
+          className="bg-white rounded-lg shadow-sm p-6 cursor-pointer hover:shadow-md transition-shadow"
+        >
           <div className="flex items-center">
             <div className="p-3 rounded-full bg-yellow-100 text-yellow-600 mr-4">
               <FiPackage className="h-6 w-6" />
@@ -70,7 +82,10 @@ const Dashboard = () => {
           </div>
         </div>
 
-        <div className="bg-white rounded-lg shadow-sm p-6">
+        <div 
+          onClick={() => handleCardClick('Shipped')}
+          className="bg-white rounded-lg shadow-sm p-6 cursor-pointer hover:shadow-md transition-shadow"
+        >
           <div className="flex items-center">
             <div className="p-3 rounded-full bg-indigo-100 text-indigo-600 mr-4">
               <FiTruck className="h-6 w-6" />
@@ -82,7 +97,10 @@ const Dashboard = () => {
           </div>
         </div>
 
-        <div className="bg-white rounded-lg shadow-sm p-6">
+        <div 
+          onClick={() => handleCardClick('Delivered')}
+          className="bg-white rounded-lg shadow-sm p-6 cursor-pointer hover:shadow-md transition-shadow"
+        >
           <div className="flex items-center">
             <div className="p-3 rounded-full bg-green-100 text-green-600 mr-4">
               <FiCheckCircle className="h-6 w-6" />
