@@ -1,4 +1,3 @@
-// apps/rider-pwa/src/components/EmptyState.jsx
 import { FiPackage } from 'react-icons/fi';
 
 const EmptyState = ({ title = 'No orders', message }) => {

@@ -1,4 +1,3 @@
-// apps/client/src/pages/OrderDetailsPage.jsx
 import { useParams, Link } from 'react-router-dom';
 import { FiArrowLeft } from 'react-icons/fi';
 import { useOrder } from '../hooks/useOrders';

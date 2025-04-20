@@ -1,4 +1,3 @@
-// apps/rider-pwa/src/pages/NotFoundPage.jsx
 import { Link } from 'react-router-dom';
 import { FiHome } from 'react-icons/fi';
 

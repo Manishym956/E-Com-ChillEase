@@ -1,4 +1,3 @@
-// apps/rider-pwa/src/pages/OrdersPage.jsx
 import { useRiderOrders } from '../hooks/useOrders';
 import OrderCard from '../components/OrderCard';
 import Loader from '../components/Loader';

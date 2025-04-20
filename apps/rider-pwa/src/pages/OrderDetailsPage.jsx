@@ -1,4 +1,3 @@
-// apps/rider-pwa/src/pages/OrderDetailsPage.jsx
 import { useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { FiArrowLeft, FiPhone, FiMapPin, FiCheckCircle, FiXCircle, FiPackage } from 'react-icons/fi';

@@ -1,4 +1,3 @@
-// apps/client/src/pages/ProductPage.jsx
 import { useState, useEffect, useMemo, useCallback } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { FiStar, FiMinus, FiPlus, FiArrowLeft } from 'react-icons/fi';

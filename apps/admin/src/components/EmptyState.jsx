@@ -1,4 +1,3 @@
-// apps/admin/src/components/EmptyState.jsx
 import { FiPackage, FiPlus } from 'react-icons/fi';
 import { Link } from 'react-router-dom';
 

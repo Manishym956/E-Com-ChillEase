@@ -1,4 +1,3 @@
-// apps/admin/src/components/Sidebar.jsx
 import { NavLink } from 'react-router-dom';
 import { FiHome, FiPackage, FiUsers, FiX } from 'react-icons/fi';
 

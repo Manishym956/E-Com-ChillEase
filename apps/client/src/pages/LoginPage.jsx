@@ -1,4 +1,3 @@
-// apps/client/src/pages/LoginPage.jsx
 import { useEffect, useRef } from 'react';
 import { useAuth } from '../hooks/useAuth';
 import { useNavigate } from 'react-router-dom';

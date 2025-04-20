@@ -1,4 +1,3 @@
-// apps/rider-pwa/src/components/Header.jsx
 import { useNavigate } from 'react-router-dom';
 import { FiUser } from 'react-icons/fi';
 import { useAuth } from '../hooks/useAuth';

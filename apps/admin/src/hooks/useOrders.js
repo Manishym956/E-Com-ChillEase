@@ -1,4 +1,3 @@
-// apps/admin/src/hooks/useOrders.js
 import { useState, useEffect } from 'react';
 import { getAllOrders, getOrderById } from '../services/orderService';
 

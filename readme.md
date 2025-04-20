@@ -2,7 +2,7 @@
 
 ChillEase is a comprehensive e-commerce platform specializing in fans and air conditioners. This monorepo contains three separate applications and a backend server, providing a complete solution for customers, administrators, and delivery personnel.
 
-![ChillEase](https://placehold.co/600x200?text=ChillEase)
+![ChillEase](355a0a18-64e4-4dbc-a7f8-9f847ef58f72.jpeg)
 
 ## 📹 Demo Video
 

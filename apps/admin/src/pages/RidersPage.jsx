@@ -1,4 +1,3 @@
-// apps/admin/src/pages/RidersPage.jsx
 import { FiMail, FiPhone } from 'react-icons/fi';
 import { useRiders } from '../hooks/useRiders';
 import Loader from '../components/Loader';

@@ -1,4 +1,3 @@
-// apps/client/src/pages/OrdersPage.jsx
 import { Link } from 'react-router-dom';
 import { FiChevronRight, FiPackage } from 'react-icons/fi';
 import { useOrders } from '../hooks/useOrders';

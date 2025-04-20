@@ -1,4 +1,3 @@
-// apps/client/src/hooks/useProducts.js
 import { useState, useEffect } from 'react';
 import { useSearchParams } from 'react-router-dom';
 import { getAllProducts, getProductById } from '../services/productService';

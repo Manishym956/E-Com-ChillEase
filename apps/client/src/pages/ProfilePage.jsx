@@ -1,4 +1,3 @@
-// apps/client/src/pages/ProfilePage.jsx
 import { useState } from 'react';
 import { useAuth } from '../hooks/useAuth';
 import { updateProfile } from '../services/authService';

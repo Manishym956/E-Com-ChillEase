@@ -1,4 +1,3 @@
-// apps/client/src/pages/CheckoutPage.jsx
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { FiCheck } from 'react-icons/fi';

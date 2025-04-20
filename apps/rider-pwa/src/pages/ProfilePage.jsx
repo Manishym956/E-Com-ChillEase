@@ -1,4 +1,3 @@
-// apps/rider-pwa/src/pages/ProfilePage.jsx
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../hooks/useAuth';
 import { FiLogOut } from 'react-icons/fi';

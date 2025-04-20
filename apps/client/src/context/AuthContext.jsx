@@ -1,4 +1,3 @@
-// apps/client/src/context/AuthContext.jsx
 import { createContext, useEffect, useState } from 'react';
 import { loginWithGoogle, getProfile } from '../services/authService';
 

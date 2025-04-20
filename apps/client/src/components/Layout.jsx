@@ -1,4 +1,3 @@
-// apps/client/src/components/Layout.jsx
 import { Outlet } from 'react-router-dom';
 import Header from './Header';
 import Footer from './Footer';

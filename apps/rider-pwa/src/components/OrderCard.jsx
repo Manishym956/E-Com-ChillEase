@@ -1,4 +1,3 @@
-// apps/rider-pwa/src/components/OrderCard.jsx
 import { Link } from 'react-router-dom';
 import { FiMapPin } from 'react-icons/fi';
 

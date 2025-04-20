@@ -1,4 +1,3 @@
-// apps/rider-pwa/src/components/Layout.jsx
 import { Outlet } from 'react-router-dom';
 import BottomNavigation from './BottomNavigation';
 import Header from './Header';

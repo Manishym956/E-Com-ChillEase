@@ -1,4 +1,3 @@
-// apps/client/src/pages/CartPage.jsx
 import { Link } from 'react-router-dom';
 import { FiTrash2, FiShoppingCart, FiArrowRight } from 'react-icons/fi';
 import { useCart } from '../hooks/useCart';

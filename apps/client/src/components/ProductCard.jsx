@@ -1,4 +1,3 @@
-// apps/client/src/components/ProductCard.jsx
 import { Link } from 'react-router-dom';
 import { FiStar } from 'react-icons/fi';
 

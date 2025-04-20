@@ -1,4 +1,3 @@
-// apps/admin/src/components/StatusBadge.jsx
 const StatusBadge = ({ status }) => {
     const getStatusColor = (status) => {
       switch (status) {

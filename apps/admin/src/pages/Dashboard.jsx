@@ -1,4 +1,3 @@
-// apps/admin/src/pages/Dashboard.jsx
 import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { FiPackage, FiTruck, FiCheckCircle, FiXCircle } from 'react-icons/fi';

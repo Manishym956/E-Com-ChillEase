@@ -1,4 +1,3 @@
-// apps/admin/src/services/orderService.js
 import api from './api';
 
 // Get all orders

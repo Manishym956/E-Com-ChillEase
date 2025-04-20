@@ -1,4 +1,3 @@
-// apps/client/src/components/ProductList.jsx
 import { useState, useEffect } from 'react';
 import ProductCard from './ProductCard';
 import { useProducts } from '../hooks/useProducts';

@@ -1,4 +1,3 @@
-// apps/admin/src/hooks/useRiders.js
 import { useState, useEffect } from 'react';
 import { getAllRiders } from '../services/riderService';
 

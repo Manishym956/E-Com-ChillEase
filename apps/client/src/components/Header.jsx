@@ -1,4 +1,3 @@
-// apps/client/src/components/Header.jsx
 import { useState, useEffect, useRef } from 'react';
 import { Link, useNavigate, useSearchParams } from 'react-router-dom';
 import { FiShoppingCart, FiUser, FiMenu, FiX } from 'react-icons/fi';

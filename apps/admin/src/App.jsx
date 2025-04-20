@@ -1,4 +1,3 @@
-// apps/admin/src/App.jsx
 import { Routes, Route, Navigate } from 'react-router-dom';
 import { useAuth } from './hooks/useAuth';
 import Dashboard from './pages/Dashboard';

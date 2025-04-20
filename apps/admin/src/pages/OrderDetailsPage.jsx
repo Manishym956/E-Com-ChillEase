@@ -1,4 +1,3 @@
-// apps/admin/src/pages/OrderDetailsPage.jsx
 import { useState } from 'react';
 import { useParams, Link, useNavigate } from 'react-router-dom';
 import { FiArrowLeft, FiTruck } from 'react-icons/fi';

@@ -1,4 +1,3 @@
-// apps/admin/src/components/Loader.jsx
 const Loader = () => {
     return (
       <div className="flex justify-center py-10">
