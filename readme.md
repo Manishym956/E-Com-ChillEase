@@ -4,10 +4,6 @@ ChillEase is a comprehensive e-commerce platform specializing in fans and air co
 
 ![ChillEase](355a0a18-64e4-4dbc-a7f8-9f847ef58f72.jpeg)
 
-## 📹 Demo Video
-
-Check out our demo video to see the platform in action: [ChillEase Demo](https://drive.google.com/file/d/1MYFtnUJLODKjuk4pZDCfaQV2Wq4sXpf2/view?usp=sharing)
-
 ## 🚀 Features
 
 ### Customer Application
@@ -162,5 +158,3 @@ This project is licensed under the MIT License - see the LICENSE file for detail
 - UI components using [Tailwind CSS](https://tailwindcss.com/)
 
 ---
-
-*This project was created as part of a software engineering assignment.*
