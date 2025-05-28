@@ -1,8 +1,9 @@
 **/.git
-node_modules
-.env
-dist
-build
-coverage
-tmp
-.DS_Store
+**/node_modules
+**/.env
+**/dist
+**/build
+**/coverage
+**/tmp
+**/.DS_Store
+.gitmodules
